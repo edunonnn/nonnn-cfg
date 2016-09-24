@@ -5,7 +5,13 @@
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+if [ -n "$INSIDE_EMACS" ]; then
+	# Simple theme to most compatibility
+	export ZSH_THEME="risto"
+else
+	export ZSH_THEME="bira"
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -77,6 +83,16 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Emacs
+if [ -n "$INSIDE_EMACS" ]; then
+	export TERM=xterm-256color
+	# Change emacs default-directory variable
+	chpwd() { print -P "\033AnSiTc %d" }
+	print -P "\033AnSiTu %n"
+	print -P "\033AnSiTc %d"
+	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=magenta'
+fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
