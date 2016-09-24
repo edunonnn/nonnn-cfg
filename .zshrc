@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/nonnn/.oh-my-zsh
+  export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -53,7 +53,10 @@ plugins=(git)
 
 # User configuration
 
-  export PATH="/home/nonnn/go/bin:/home/nonnn/.rvm/gems/ruby-2.2.2/bin:/home/nonnn/.rvm/gems/ruby-2.2.2@global/bin:/home/nonnn/.rvm/rubies/ruby-2.2.2/bin:/home/nonnn/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/nonnn/.rvm/bin:/home/nonnn/scripts:/home/nonnn/.rvm/bin:/home/nonnn/scripts:/home/nonnn/.rvm/bin:/home/nonnn/.rvm/bin:/home/nonnn/scripts:/home/nonnn/.rvm/bin"
+export PATH=$PATH:$HOME/scripts
+# Kubernetes
+export PATH=$PATH:$HOME/kube/bin
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
