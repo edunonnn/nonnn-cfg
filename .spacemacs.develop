@@ -427,8 +427,7 @@ you should place your code here."
           (t
            (message "No previous cscope buffer found"))))
   (with-eval-after-load "helm-cscope"
-    (bind-key "C-c sc" 'helm-cscope-find-calling-this-funtcion helm-cscope-mode-map)
-    (bind-key "C-c sc" 'helm-cscope-find-calling-this-funtcion helm-cscope-mode-map)
+    (bind-key "C-c sc" 'helm-cscope-find-calling-this-function helm-cscope-mode-map)
     (bind-key "C-c sC" 'helm-cscope-find-called-function helm-cscope-mode-map)
     (bind-key "C-c sd" 'helm-cscope-find-global-definition helm-cscope-mode-map)
     (bind-key "C-c sg" 'helm-cscope-find-global-definition helm-cscope-mode-map)
