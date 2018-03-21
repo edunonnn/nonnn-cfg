@@ -65,13 +65,13 @@
 *** Install Spacemacs
 #+begin_src shell :eval no
 cd ~
-git clone https://github.com/edunonnn/nonnn-cfg.git
+git clone https://github.com/edunonnn/nonnn-conf.git
 git clone https://github.com/syl20bnr/spacemacs -b develop
-ln -s nonnn-cfg/.spacemacs.develop ~/.spacemacs
+ln -s nonnn-conf/.spacemacs.develop ~/.spacemacs
 ln -s spacemacs ~/.emacs.d
 # NOTE:
 # Please rename your ~/.emacs.d if it already exist
-# Emacs Tips in ~/nonnn-cfg/org/emacs.org
+# Emacs Tips in ~/nonnn-conf/org/emacs.org
 #+end_src
 * Demo
 * Next
