@@ -377,7 +377,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
             (lambda()
               (setq tab-width 8)
               (setq indent-tabs-mode t)))
- )
+  ;; diff-mode
+  (add-hook 'diff-mode-hook
+            (lambda()
+              (whitespace-mode -1)
+              (diff-auto-refine-mode -1)))
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
