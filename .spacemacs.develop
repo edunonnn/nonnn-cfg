@@ -52,6 +52,7 @@ values."
      ;; syntax-checking
      ;; version-control
      c-c++
+     gtags
      cscope
      semantic
      html
