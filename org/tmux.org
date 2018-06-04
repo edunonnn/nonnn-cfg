@@ -22,6 +22,20 @@
 
 ** Installation and Upgrade
    - http://stackoverflow.com/questions/25940944/ugrade-tmux-from-1-8-to-1-9-on-ubuntu-14-04
+   - https://bogdanvlviv.com/posts/tmux/how-to-install-the-latest-tmux-on-ubuntu-16_04.html
+
+     #+BEGIN_SRC shell
+       sudo apt install pkg-config libevent-dev libncurses5-dev
+       git clone https://github.com/tmux/tmux.git /tmp/tmux
+       cd /tmp/tmux
+       git checkout 2.7
+       ./autogen.sh
+       ./configure --prefix='/usr/local/stow/tmux-2.7'
+       make
+       sudo make install
+     #+END_SRC
+
+
 ** Attach/resume
    | tmux attach                               | as screen -r            |
    | tmux attach -t session-id                 | as screen -r session-id |
@@ -53,10 +67,12 @@
    #+END_SRC
 * tmux.conf
 ** Sample
+
    #+BEGIN_SRC sh
    /usr/share/doc/tmux/examples/vim-keys.conf
    /usr/share/doc/tmux/examples/screen-keys.conf
    #+END_SRC
+
 * tmuxinator
   - Create and manage tmux sessions easily.
   - https://github.com/tmuxinator/tmuxinator
@@ -84,6 +100,7 @@
    # type this in terminal
    tmux source ~/.tmux.conf
    #+END_SRC
+
 * Tmux useful plugins
 **  https://github.com/tmux-plugins/tmux-yank
 

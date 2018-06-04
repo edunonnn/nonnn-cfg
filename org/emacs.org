@@ -2,34 +2,43 @@
 ** Obtaining / Downloading Emacs
    1. GNU Emacs can be downloaded from [[http://ftp.gnu.org/pub/gnu/emacs/][emacs]]
 ** Prepare relative package to install
+
    #+BEGIN_SRC sh
    apt-get install build-essential texinfo libx11-dev libncurses5-dev libgtk2.0-dev libtiff-dev libjpeg-dev libgif-dev libpng-dev libxpm-dev
    #+END_SRC
+
 ** Starting install Emacs
    1. Configure Emacs
+
       #+BEGIN_SRC sh
       cd EMACS-SOURCE-DIR/
       make distclean
       # ./configure --prefix="The path that you want to install"
       ./configure --prefix="/usr/local/stow/emacs-2x.x"
       #+END_SRC
+
       1) If `configure' didn't find some (optional) image support libraries,
-	 such as Xpm, jpeg, etc., and you want to use them, refer to the
-	 subsection "Image support libraries" in INSTALL file of Emacs.
+      	 such as Xpm, jpeg, etc., and you want to use them, refer to the
+	       subsection "Image support libraries" in INSTALL file of Emacs.
 
       2) Emacs default installing path is usr/local If you want Emacs to
-	 install in one folder, make a folder emacs23 in ~/
-	 ./configure --prefix=~/emacs23
+	       install in one folder, make a folder emacs23 in ~/
+	       ./configure --prefix=~/emacs23
+
       3) Configure without X window
-	 #+BEGIN_SRC sh
-	 ./configure --with-x-toolkit=no --with-x=no --with-xpm=no --without-imagemagick --without-jpeg \
-   		--without-gif --without-tiff --without-png --without-rsvg
+
+         #+BEGIN_SRC sh
+	       ./configure --with-x-toolkit=no --with-x=no --with-xpm=no --without-imagemagick --without-jpeg \
+   		   --without-gif --without-tiff --without-png --without-rsvg
          #+END_SRC
+
    2. Make and install
+
       #+BEGIN_SRC sh
       make
       # If `make' succeeds
       #+END_SRC
+
    3. Do "make clean" to conserve disk space
 * Shortcut key
 ** Add / Delete prefix in every line
@@ -120,9 +129,11 @@
 | M-s h f | M-x hi-lock-find-patterns              | Searches for Hi-Lock patterns in the buffer to use |
 
 ** Indentation
-| C-M-\     | Indentation region                                                                                   |
-| C-u <TAB> | Shift an entire parenthetical grouping rigidly sideways so that its first line is properly indented. |
-|           | Press this hot key at left parent of group Ex. {, (                                                  |
+
+   | C-M-\       | Indentation region                                                                                   |
+   | C-u <TAB>   | Shift an entire parenthetical grouping rigidly sideways so that its first line is properly indented. |
+   |             | Press this hot key at left parent of group Ex. {, (                                                  |
+   | M-x c-guess | Automatic indent by parsing current file style                                                       |
 
 ** Insert/delete comment
 
@@ -133,11 +144,31 @@
 
 | C-c C-\ | c-backslash-region | inserts and aligns or deletes end-of-line backslashes in the current region |
 
+** Insert increased number
+
+*** Increase counter
+
+    #+BEGIN_EXAMPLE
+    C-x C-k TAB
+    # You can set started counter by C-x C-k C-c
+    #+END_EXAMPLE
+
+*** Evil number
+
+    | SPC n + | evil-number increase number |
+    | SPC n - | evil-number decrease number |
+
 ** Jump back to past position
+
    | C-x C-SPC | pop-global-mark |
+
 ** Kmacro
 | C-x C-k TAB | kmacro-insert-counter ARG | Insert macro counter, then increment it by ARG.   |
 | C-x C-k C-c | kmacro-set-counter        | Set `kmacro-counter' to ARG or prompt if missing. |
+
+** Mark a function
+
+| C-M-h | C mark function  |
 
 ** Mark whole buffer
    | C-x h | mark-whole-buffer | Put point at beginning and mark at end of buffer.|
@@ -380,27 +411,43 @@ Reference: http://emacs.stackexchange.com/questions/23871/how-to-change-font-siz
 #+end_src
 ** Magit mode
 *** Branch
+
     | b b | Checkout to specific branch |
     | b c | Create branch               |
+
 *** Blame
+
     | b b | Reblame file for view files history |
+
 *** Cherry and cherry-pick
+
     | a | Cherry-pack patch                                 |
     | A | Cherry-pack commit                                |
     | y | Show refs. Parse .git for remotes, tags, branches |
     | Y | Git cherry                                        |
+
+*** Log
+
+    | y s | Copy current line's revision (SHA1)          |
+    | y b | Copy current buffer's newest revision (SHA1) |
+
 *** Push
+
     | P P | Push the changes |
 
 *** Rebase
+
     | r i | interactive rebase |
+
 *** Stash
+
     | z   | Create new stash                    |                                                          |
     | Z   | Create new stash and maintain state | Leaves current changes in working tree and staging area. |
     | RET | View stash                          |                                                          |
     | a   | Apply stash                         |                                                          |
     | A   | Pop stash                           |                                                          |
     | k   | Drop stash                          |                                                          |
+
 ** nXML mode
 *** Change child indent
     - customize-group nxml -> Search child indent
@@ -412,152 +459,6 @@ Reference: http://emacs.stackexchange.com/questions/23871/how-to-change-font-siz
    | C-c TAB b       | Send the current block to the inferior Octave process    |
    | C-c TAB f       | Send the current function to the inferior Octave process |
 
-** Org mode
-*** Break line(new line)
-    - Using "\\" to break line
-#+BEGIN_SRC org
-    This is the first line \\
-    This is the second line
-#+END_SRC
-*** Disabling underscore-to-subscript
-    #+BEGIN_SRC org
-    #+OPTIONS: ^:nil
-    #+END_SRC
-    | C-c C-e t | inserts a template containing all the options |
-*** Escape brackets
-    #+BEGIN_SRC org
-    =[escape bracket]=
-    #+END_SRC
-*** Export to tex or pdf
-    | C-c C-e p | Export to pdf |
-    | C-c C-e l | Export to tex |
-*** Foot note
-#+BEGIN_SRC Org mode
-    footnote[1]
-    footnote[fn:note_one]
-
-    [1] simple footnote
-    [fn:note_one] footnote one
-#+END_SRC
-
-*** Hyper link
-**** Link format
-#+BEGIN_SRC org
-    [[link][description]] or [[link]]
-#+END_SRC
-****
-*** Image
-**** Insert an image
-     #+BEGIN_SRC org
-     [[/path/to/image.jpg]]
-     #+END_SRC
-
-**** Scale an image to export to LaTeX
-     - Org mode version < 8.0
-       #+BEGIN_SRC org
-       #+ATTR_LaTeX: width=10cm
-       [[/path/to/image.jpg]]
-       #+END_SRC
-     - Org mode >= 8.0
-       #+BEGIN_SRC org
-       #+ATTR_LaTeX: :width 10cm
-       [[/path/to/image.jpg]]
-       #+END_SRC
-**** Center an image to export to LaTeX
-     - Org mode < 8.0
-       #+BEGIN_SRC org
-       #+ATTR_LaTeX: float
-       [[/path/to/image.jpg]]
-       #+END_SRC
-     - Org mode >= 8.0
-       #+BEGIN_SRC org
-       #+ATTR_LaTeX: :float wrap
-       [[/path/to/image.jpg]]
-       #+END_SRC
-
-*** Input bold and italic fonts
-    Input *bold* or /italic/ fonts are pretty easy in org mode:
-    #+BEGIN_SRC org
-    This is *bold*, /italic/, _underlined_, =code=
-    #+END_SRC
-*** Page break
-    #+BEGIN_SRC org
-    \newpage
-    #+END_SRC
-*** Table
-**** Column and row editing
-
-| Column and row editing |                             |                                                                                              |
-|------------------------+-----------------------------+----------------------------------------------------------------------------------------------|
-| M-S-<up>               | org-table-kill-row          | Kill the current row or horizontal line.                                                     |
-| M-S-<down>             | org-table-insert-row        | Insert a new row above the current row.                                                      |
-| M-<up>                 | org-table-move-row-up       |                                                                                              |
-| M-<down>               | org-table-move-row-down     |                                                                                              |
-| M-S-<left>             | org-table-delete-column     | Kill the current column.                                                                     |
-| M-S-<right>            | org-table-insert-column     | Insert a new column to the left of the cursor position.                                      |
-| M-<left>               | org-table-move-column-left  |                                                                                              |
-| M-<right>              | org-table-move-column-right |                                                                                              |
-| C-c -                  | org-table-insert-hline      | Insert a horizontal line below current row.                                                  |
-| C-c <RET>              | org-table-hline-and-move    | Insert a horizontal line below current row, and move the cursor into the row below that line |
-
-**** Column Group
-
-#+BEGIN_SRC org
-| Column Group |    |    |    |    |    |           |           |           |
-|--------------+----+----+----+----+----+-----------+-----------+-----------|
-| aa           | bb | bb | cc | cc | cc | vert_line | vert_line | vert_line |
-|--------------+----+----+----+----+----+-----------+-----------+-----------|
-| /            | <  | >  | <  |    | >  | <         | <         | <         |
-| a            | b  | b  | c  | c  | c  | vl1       | vl2       | vl3       |
-#+END_SRC
-
-**** Border of table export to LaTeX
-***** Org mode < 8.0
-      #+BEGIN_SRC org
-      #+ATTR_LaTeX: align=|c|c|c|
-      | Table1 |   |   |
-      |--------+---+---|
-      | a      | b | c |
-      |--------+---+---|
-      | d      | e | f |
-      #+END_SRC
-
-***** Org mode >= 8.0
-      #+BEGIN_SRC org
-      #+ATTR_LaTeX: :align |c|c|c|
-      | Table1 |   |   |
-      |--------+---+---|
-      | a      | b | c |
-      |--------+---+---|
-      | d      | e | f |
-      #+END_SRC
-
-**** Formula syntax for Calc
-
-#+BEGIN_SRC org
-| r1/c1(@1/$1) | c2 |        c3 |    c4 sum | c5 sub |
-|--------------+----+-----------+-----------+--------|
-| r2           |  5 |        10 |        15 |     -5 |
-| r3           |  1 |         2 |         3 |     -1 |
-| r4           |  3 |         4 |         7 |     -3 |
-| r5 mean      |  3 | 5.3333333 | 8.3333333 |    -3. |
-#+TBLFM: $4=vsum($2..$3)::@5$2=vmean(@2$2..@4$2)::@5$3=vmean(@2$3..@4$3)::$5=$3-$4
-#+END_SRC
-
-#+BEGIN_SRC org
-| r1/c1(@1/$1) | c2 |        c3 |    c4 c2*10-c3 |
-|--------------+----+-----------+----------------|
-| r2           |  5 |        10 |             40 |
-#+TBLFM: $4=$2*10-$3
-#+END_SRC
-
-| C-c ?   | In a cell, this command will tell you its : line @4, col $5, ref @4$5 or E4, formula: E&=C&-D& |
-| C-c }   | Turn on the reference visualization grid                                                       |
-| C-c {   | Turn on the debugging mode (Perform C-c C-c on #+TBLFM:... line)                               |
-| C-c C-c | Exit the formula editor and store the modified formulas (Issue on the lind #+TBLFM:... )       |
-*** TimeStamp
-    | C-c . | M-x org-time-stamp          | Insert timestamp like <2014-03-18 二>              |
-    | C-c q | M-x org-time-stamp-inactive | Insert an inactive time stamp like [2014-03-18 二] |
 ** Python
 *** JEDI
 **** Installation
@@ -587,6 +488,19 @@ Reference: http://emacs.stackexchange.com/questions/23871/how-to-change-font-siz
      | C-c C-t i | python-skeleton-if       |
      | C-c C-t t | python-skeleton-try      |
      | C-c C-t w | python-skeleton-while    |
+** Projectile
+*** Don't ignore(keep) file pattern and directory
+
+    #+BEGIN_EXAMPLE
+    # vi .projectile
+
+    # Keep subdirectory
+    +/src/subdir
+    # Keep file patterns
+    !/src/subdir
+    !*.yml
+    #+END_EXAMPLE
+
 ** GDB mode
 *** Open GDB
     | M-x gdb              | open gdb                 |
@@ -619,6 +533,202 @@ Reference: http://emacs.stackexchange.com/questions/23871/how-to-change-font-siz
 *** Spacemacs
    | , . | open web micro state, ? for help |
    
+** Yasnippet mode
+
+   | M-x yas/describe-tables | List snippets |
+
+* Org mode
+** Tutorials
+   - Org-mode Emacs 下的瑞士軍刀 (Excellent!!)
+     https://coldnew.github.io/COSCUP2013_org-mode/slide.html#1
+
+   - orgmode-cn/org.org at master · marboo/orgmode-cn · GitHub  org-mode完整手册
+     https://github.com/marboo/orgmode-cn/blob/master/org.org
+   - Org-mode 简明手册
+     http://www.cnblogs.com/Open_Source/archive/2011/07/17/2108747.html
+** Break line(new line)
+    - Using "\\" to break line
+#+BEGIN_SRC org
+    This is the first line \\
+    This is the second line
+#+END_SRC
+** Disabling underscore-to-subscript
+   #+BEGIN_SRC org
+   #+OPTIONS: ^:nil
+   #+END_SRC
+   | C-c C-e t | inserts a template containing all the options |
+** Escape brackets
+
+   #+BEGIN_SRC org
+   =[escape bracket]=
+   #+END_SRC
+
+** Export to tex or pdf
+   - Prerequisite package: texlive-latex-recommended(pdflatex), texlive-latex-extra(wrapfig.sty)
+
+   | C-c C-e p | Export to pdf |
+   | C-c C-e l | Export to tex |
+
+** Evaluate code block
+*** C-c C-c or C-c C-v e
+*** Fix error No org-babel-execute function for shell!
+
+    #+BEGIN_SRC shell
+    rm ~/.emacs.d/elpa/org-20171003/*.elc
+    #+END_SRC
+
+*** org-babel-variable-assignments:sh: Symbol's function definition is void: org-babel-get-header
+
+    #+BEGIN_SRC emacs-lisp
+    (org-babel-do-load-languages
+    'org-babel-load-languages '((C . t)))
+    #+END_SRC
+
+** Foot note
+#+BEGIN_SRC Org mode
+    footnote[1]
+    footnote[fn:note_one]
+
+    [1] simple footnote
+    [fn:note_one] footnote one
+#+END_SRC
+
+** Hyper link
+*** Link format
+
+    #+BEGIN_SRC org
+    [[link][description]] or [[link]]
+    #+END_SRC
+
+** Image
+*** Insert an image
+    #+BEGIN_SRC org
+    [[/path/to/image.jpg]]
+    #+END_SRC
+
+*** Scale an image to export to LaTeX
+    - Org mode version < 8.0
+      #+BEGIN_SRC org
+      #+ATTR_LaTeX: width=10cm
+      [[/path/to/image.jpg]]
+      #+END_SRC
+    - Org mode >= 8.0
+      #+BEGIN_SRC org
+      #+ATTR_LaTeX: :width 10cm
+      [[/path/to/image.jpg]]
+      #+END_SRC
+*** Center an image to export to LaTeX
+    - Org mode < 8.0
+      #+BEGIN_SRC org
+      #+ATTR_LaTeX: float
+      [[/path/to/image.jpg]]
+      #+END_SRC
+    - Org mode >= 8.0
+      #+BEGIN_SRC org
+      #+ATTR_LaTeX: :float wrap
+      [[/path/to/image.jpg]]
+      #+END_SRC
+
+** Text format
+
+   #+BEGIN_SRC org
+   This is *bold*, /italic/, _underlined_, =verbatim=, ~code~ +strike-through+
+   #+END_SRC
+
+   - subscript and superscript need use =C-c C-x \= to interpret to UTF8
+
+   #+BEGIN_SRC org
+   E=MC^2
+   R_sun = 6.96 x 10^8 m
+   #+END_SRC
+
+
+** Page break
+   #+BEGIN_SRC org
+   \newpage
+   #+END_SRC
+** Table
+*** Column and row editing
+
+| Column and row editing |                             |                                                                                              |
+|------------------------+-----------------------------+----------------------------------------------------------------------------------------------|
+| M-S-<up>               | org-table-kill-row          | Kill the current row or horizontal line.                                                     |
+| M-S-<down>             | org-table-insert-row        | Insert a new row above the current row.                                                      |
+| M-<up>                 | org-table-move-row-up       |                                                                                              |
+| M-<down>               | org-table-move-row-down     |                                                                                              |
+| M-S-<left>             | org-table-delete-column     | Kill the current column.                                                                     |
+| M-S-<right>            | org-table-insert-column     | Insert a new column to the left of the cursor position.                                      |
+| M-<left>               | org-table-move-column-left  |                                                                                              |
+| M-<right>              | org-table-move-column-right |                                                                                              |
+| C-c -                  | org-table-insert-hline      | Insert a horizontal line below current row.                                                  |
+| C-c <RET>              | org-table-hline-and-move    | Insert a horizontal line below current row, and move the cursor into the row below that line |
+
+*** Column Group
+
+#+BEGIN_SRC org
+| Column Group |    |    |    |    |    |           |           |           |
+|--------------+----+----+----+----+----+-----------+-----------+-----------|
+| aa           | bb | bb | cc | cc | cc | vert_line | vert_line | vert_line |
+|--------------+----+----+----+----+----+-----------+-----------+-----------|
+| /            | <  | >  | <  |    | >  | <         | <         | <         |
+| a            | b  | b  | c  | c  | c  | vl1       | vl2       | vl3       |
+#+END_SRC
+
+*** Border of table export to LaTeX
+**** Org mode < 8.0
+     #+BEGIN_SRC org
+     #+ATTR_LaTeX: align=|c|c|c|
+     | Table1 |   |   |
+     |--------+---+---|
+     | a      | b | c |
+     |--------+---+---|
+     | d      | e | f |
+     #+END_SRC
+
+**** Org mode >= 8.0
+     #+BEGIN_SRC org
+     #+ATTR_LaTeX: :align |c|c|c|
+     | Table1 |   |   |
+     |--------+---+---|
+     | a      | b | c |
+     |--------+---+---|
+     | d      | e | f |
+     #+END_SRC
+
+*** Formula syntax for Calc
+
+#+BEGIN_SRC org
+| r1/c1(@1/$1) | c2 |        c3 |    c4 sum | c5 sub |
+|--------------+----+-----------+-----------+--------|
+| r2           |  5 |        10 |        15 |     -5 |
+| r3           |  1 |         2 |         3 |     -1 |
+| r4           |  3 |         4 |         7 |     -3 |
+| r5 mean      |  3 | 5.3333333 | 8.3333333 |    -3. |
+#+TBLFM: $4=vsum($2..$3)::@5$2=vmean(@2$2..@4$2)::@5$3=vmean(@2$3..@4$3)::$5=$3-$4
+#+END_SRC
+
+#+BEGIN_SRC org
+| r1/c1(@1/$1) | c2 |        c3 |    c4 c2*10-c3 |
+|--------------+----+-----------+----------------|
+| r2           |  5 |        10 |             40 |
+#+TBLFM: $4=$2*10-$3
+#+END_SRC
+
+| C-c ?   | In a cell, this command will tell you its : line @4, col $5, ref @4$5 or E4, formula: E&=C&-D& |
+| C-c }   | Turn on the reference visualization grid                                                       |
+| C-c {   | Turn on the debugging mode (Perform C-c C-c on #+TBLFM:... line)                               |
+| C-c C-c | Exit the formula editor and store the modified formulas (Issue on the lind #+TBLFM:... )       |
+** TimeStamp
+   | C-c . | M-x org-time-stamp          | Insert timestamp like <2014-03-18 二>              |
+   | C-c q | M-x org-time-stamp-inactive | Insert an inactive time stamp like [2014-03-18 二] |
+** Options
+*** Don't indent all paragraphs
+
+    Put following line at top of org file
+    #+BEGIN_SRC org
+    \setlength{\parindent}{0em}
+    #+END_SRC
+
 * plug-in
 ** smex
    - Smex is a M-x enhancement for Emacs. Built on top of Ido, it provides a
@@ -655,15 +765,24 @@ Reference: http://emacs.stackexchange.com/questions/23871/how-to-change-font-siz
 ** Delete Auto Save files
    + To delete all auto-save files in the current directory, use `#’ in Dired to mark the files, then ‘x’ to delete th
    + To recursively delete all auto-save files under the current directory, run:
+
 #+BEGIN_SRC sh
      find -name "#*#" | xargs rm
 #+END_SRC sh
+
      If the file names contain whitespace, it is necessary to use one of:
+
 #+BEGIN_SRC sh
      find -name "#*#" -print0 | xargs -0 rm
      find -name "#*#" -exec rm {} \;
 #+END_SRC sh
+
 * Lisp
+** Debug when emacs hang or stuck
+*** ~debug-on-quit~ for infinite loop and can quit with C-g
+*** ~debug-on-error~ for catch the error
+*** ~debug-on-entry RET call-process~ for Emacs hangs but C-g doesn't work
+
 ** Get file name w/ directory from buffer
    #+BEGIN_SRC elisp
    Eval: (buffer-file-name)
@@ -749,6 +868,7 @@ https://www.emacswiki.org/emacs/AdvisingFunctions
 | ~SPC f t~ | toggle file tree side bar using ~NeoTree~ |
 
 *** Folding
+
 | z a | evil-toggle-fold                                 |
 | z o | evil-open-fold                                   |
 | z O | evil-open-fold-rc Open fold at point recursively |
@@ -765,9 +885,11 @@ https://www.emacswiki.org/emacs/AdvisingFunctions
 | ~C-M-<up>~, ~M-<prior(PgUp)>~  | Scroll other window up                       |
 | ~C-M-<down>~, ~M-<down(PgDn)>~ | Scroll other window down                     |
 *** Helm-ag
-| ~search pattern add option -A<n> -B<n> -C<n>~ | show after/before/around context |
+| ~search limit to filename add option -G~      | ex. foo -G\.sh. show "foo" in *.sh |
+| ~search pattern add option -A<n> -B<n> -C<n>~ | show after/before/around context   |
 
 *** Highlight
+
 | ~SPC s c~ | Clean evil-search-highlight-persist |
 
 *** HTML
@@ -789,7 +911,8 @@ https://www.emacswiki.org/emacs/AdvisingFunctions
 | ~n,N,TAB~     | navigate between the occurrences                                   |
 
 *** Magit
-| ~SPC g s~ | git status |
+| ~SPC g s~   | git status               |
+| ~SPC g f h~ | show logs of this file   |
 
 *** NeoTree
 | ~U~       | Up level of node |
@@ -801,9 +924,12 @@ https://www.emacswiki.org/emacs/AdvisingFunctions
 | ~SPC j i~ | jump-in-buffer, like tlist list functions in buffer |
 
 *** Package
-| ~SPC a k~ | paradox-list-packages |
+
+| ~SPC a k~                             | paradox-list-packages |
+| ~configuration-layer/update-packages~ | Update packages       |
 
 *** Projectile
+
 | ~SPC p d~ | find directory                      |
 | ~SPC p f~ | find file                           |
 | ~SPC p p~ | switch project                      |
@@ -811,7 +937,7 @@ https://www.emacswiki.org/emacs/AdvisingFunctions
 | ~SPC p r~ | open a recent file                  |
 | ~SPC p R~ | replace a string                    |
 | ~SPC p t~ | open =NeoTree= in =projectile= root |
-| ~C-c p l~ | find file in directory              |
+| ~C-c p l~ | find file name in directory         |
 
 *** Search
 **** Highlight symbol and edit (iedit)
@@ -890,8 +1016,8 @@ directly search into it like with ~SPC s p~.
 | ~SPC r y~ | search from kill ring |
 
 *** Semantic
-    | ~SPC s j~                            | list all the symbols of a buffer          |
-    | Mark a region of code then ~SPC m r~ | Extract code to new function              |
+    | ~SPC s j~                            | list all the symbols of a buffer |
+    | Mark a region of code then ~SPC m r~ | Extract code to new function     |
 *** Spacemacs-editing
 | ~SPC v~              | Expand region                             |
 | ~SPC v (repeat v) /~ | Expand region and search in project       |
@@ -988,13 +1114,15 @@ like that behavior, you can set (=setq evil-move-cursor-back nil=).
     #+END_SRC
 *** Disable Mouse mode
 **** Make copy/paste working with the mouse in X11 terminals?
-It is possible to disable the mouse support in X11 terminals in order to
-enable copying/pasting with the mouse. You need to add this line to your
-=dotspacemacs/user-config=:
 
-#+begin_src emacs-lisp
-(xterm-mouse-mode -1)
-#+end_src
+     It is possible to disable the mouse support in X11 terminals in order to
+     enable copying/pasting with the mouse. You need to add this line to your
+     =dotspacemacs/user-config=:
+
+     #+begin_src emacs-lisp
+     (xterm-mouse-mode -1)
+     #+end_src
+
 *** Disable highlight current line mode in term mode
     - spacemacs commit ID a8bd6dc * Disable global-hl-line-mode in shell-like buffers
 *** magit log/commit vertical line alignment mess up
@@ -1016,5 +1144,25 @@ enable copying/pasting with the mouse. You need to add this line to your
       commit: 7a0b49e * nonnn-develop cscope: Add prefix 'C-c s' series keybindings
 *** List all functions name in file
 *** =SPC h SPC= or =SPC h l= layers documents will disappear(only in develop branch)
+** Run graphic Emacs by X11 forwarding
+#+BEGIN_SRC sh
+ssh -X user@server emacs
+#+END_SRC
+
 ** Xterm special key combinations
 http://bamanzi.bitbucket.org/blog/2013/02/xterm-ctlseqs-and-emacs.html
+** Replace ^M to newline at end of string
+
+   #+BEGIN_EXAMPLE
+   M-x replace-string RET C-q C-m RET C-q C-j RET
+   #+END_EXAMPLE
+
+** Cannot copy text by mouse middle key in terminal mode
+   There has unknown reason for this when using emacsclient
+** How do I change the indentation for switch?
+
+   https://www.gnu.org/software/emacs/manual/html_node/efaq/Indenting-switch-statements.html
+
+   #+BEGIN_SRC lisp
+   (c-set-offset 'case-label '+)
+   #+END_SRC
