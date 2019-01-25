@@ -70,6 +70,9 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(hideshow-org
                                       ztree
+                                      (vim-modeline :location
+                                                    (recipe :fetcher github
+                                                            :repo "cinsk/emacs-vim-modeline"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -501,6 +504,9 @@ It allows copy/navigate term buffer content as normal buffer"
               (lambda()
                 (bind-key "M-RET" 'magit-diff-visit-file-worktree)))
     )
+  ;; vim-modeline to apply ex. // vi:sw=3
+  (with-eval-after-load 'vim-modeline
+    (add-hook 'find-file-hook 'vim-modeline/do))
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
