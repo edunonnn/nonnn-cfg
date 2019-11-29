@@ -1,0 +1,71 @@
+* Install oh-my-zsh
+
+   #+BEGIN_SRC sh
+   sudo apt-get install zsh
+   # If built zsh from source. sudo emacs -nw -q /etc/shells and add /usr/local/bin/zsh
+   wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+   chsh -s `which zsh`
+   sudo shutdown -r 0
+   #+END_SRC
+
+** Install ZSH from source
+
+   #+BEGIN_SRC sh
+   git clone https://github.com/zsh-users/zsh /tmp/zsh
+   cd /tmp/zsh
+   ./Util/preconfig
+   ./configure --prefix=/usr/local
+   make
+   make install
+   #+END_SRC
+
+* Customize
+** Overriding internals' plugins
+https://github.com/robbyrussell/oh-my-zsh/wiki/Customization#overriding-internals
+
+* Plugins
+** gitfast - a prompt as bash git-completion
+   - oh-my-zsh built-in
+** zsh-autosuggestions
+   - It suggests commands as you type, based on command history.
+   - https://github.com/zsh-users/zsh-autosuggestions
+** zsh-history-substring-search
+   - oh-my-zsh build-in
+** fasd
+*** https://github.com/clvv/fasd
+*** Install fasd
+    #+BEGIN_SRC sh
+    git clone https://github.com/clvv/fasd $ZSH_CUSTOM/plugins/fasd
+    cd $ZSH_CUSTOM/plugins/fasd
+    sudo make install
+    #+END_SRC
+*** Plugin is oh-my-zsh build-in
+*** Modify plugin file
+    #+BEGIN_SRC sh
+    emacs -nw -q ~/.oh-my-zsh/plugins/fasd/fasd.plugin.zsh
+    # Modify alias v to ...
+    alias v="f -e \"$EDITOR\""
+    #+END_SRC
+*** Usage
+    | f foo         | list frecent files matching foo                            |
+    | a foo bar     | list frecent files and directories matching foo and bar    |
+    | f js$         | list frecent files that ends in js                         |
+    | less `f bar`  | less on the most frecent file matching bar                 |
+    | z foo         | cd into the most frecent directory matching foo            |
+    | open `sf pdf` | interactively select a file matching pdf and launch `open` |
+* Switch to zsh without logout
+
+  #+begin_src sh
+  exec -l `which zsh`
+  #+end_src
+
+* Troubleshooting
+** No, I dont want share history between terminal
+   https://github.com/robbyrussell/oh-my-zsh/issues/2537
+** Home, End keys not working
+
+#+BEGIN_SRC shell
+# Add to .zshrc
+bindkey "\033[1~" beginning-of-line
+bindkey "\033[4~" end-of-line
+#+END_SRC
